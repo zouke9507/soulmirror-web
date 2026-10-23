@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoulMirror | Deep Psychological Assessments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .modal-content { max-height: 70vh; overflow-y: auto; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="font-bold text-2xl tracking-tighter text-indigo-600">SoulMirror.</span>
+                </div>
+                <div>
+                    <button onclick="openModal('contactModal')" class="text-sm font-medium text-slate-500 hover:text-indigo-600">Support</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="bg-indigo-900 text-white py-20 px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">Discover Your Hidden Self</h1>
+        <p class="text-lg sm:text-xl font-light text-indigo-200 max-w-2xl mx-auto mb-8">
+            Premium, science-backed psychological assessments and archetype reports designed to help you navigate love, relationships, and your inner world.
+        </p>
+        <a href="#products" class="inline-block bg-white text-indigo-900 font-semibold px-8 py-3 rounded-full hover:bg-indigo-50 transition duration-300">View Assessments</a>
+    </div>
+
+    <!-- Products Section -->
+    <div id="products" class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-slate-900">Featured Reports</h2>
+            <p class="mt-4 text-slate-500">Instant digital delivery upon purchase.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Product 1 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 hover:shadow-md transition">
+                <div class="h-40 bg-indigo-50 rounded-xl mb-6 flex items-center justify-center">
+                    <span class="text-4xl">❤️‍🩹</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Deep Attachment Style Report</h3>
+                <p class="text-sm text-slate-500 mb-4 h-16">Understand your hidden relationship triggers and learn how to build secure, lasting love.</p>
+                <div class="flex justify-between items-center mt-4">
+                    <span class="text-2xl font-bold text-slate-900">$1.99</span>
+                    <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium text-sm hover:bg-indigo-700">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 hover:shadow-md transition">
+                <div class="h-40 bg-purple-50 rounded-xl mb-6 flex items-center justify-center">
+                    <span class="text-4xl">🌑</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Hidden Shadow Archetype</h3>
+                <p class="text-sm text-slate-500 mb-4 h-16">Explore your subconscious mind and integrate your dark traits into profound personal power.</p>
+                <div class="flex justify-between items-center mt-4">
+                    <span class="text-2xl font-bold text-slate-900">$1.99</span>
+                    <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium text-sm hover:bg-indigo-700">Buy Now</button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 hover:shadow-md transition">
+                <div class="h-40 bg-rose-50 rounded-xl mb-6 flex items-center justify-center">
+                    <span class="text-4xl">✨</span>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Aura & Spiritual Blueprint</h3>
+                <p class="text-sm text-slate-500 mb-4 h-16">Discover your unique energetic signature and how it impacts your career and social life.</p>
+                <div class="flex justify-between items-center mt-4">
+                    <span class="text-2xl font-bold text-slate-900">$1.99</span>
+                    <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium text-sm hover:bg-indigo-700">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer with Compliance Links -->
+    <footer class="bg-slate-900 text-slate-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <span class="text-white font-bold text-xl tracking-tighter">SoulMirror.</span>
+                <p class="text-sm mt-2">© 2026 SoulMirror Labs. All rights reserved.</p>
+            </div>
+            <div class="flex space-x-6 text-sm">
+                <button onclick="openModal('privacyModal')" class="hover:text-white transition">Privacy Policy</button>
+                <button onclick="openModal('termsModal')" class="hover:text-white transition">Terms of Service</button>
+                <button onclick="openModal('refundModal')" class="hover:text-white transition">Refund Policy</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODALS (Required for Compliance) -->
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-50 p-4">
+        <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h2 class="text-2xl font-bold">Privacy Policy</h2>
+                <button onclick="closeModal('privacyModal')" class="text-slate-400 hover:text-slate-600 text-2xl">&times;</button>
+            </div>
+            <div class="p-6 modal-content text-slate-600 text-sm space-y-4">
+                <p><strong>Effective Date:</strong> Today</p>
+                <p>At SoulMirror, your privacy is our priority. We collect minimal data required to deliver your digital assessment results and process payments via our secure merchant of record (Lemon Squeezy).</p>
+                <p><strong>Data We Collect:</strong> Quiz responses (stored temporarily to generate your report), email addresses (for order delivery), and payment details (handled entirely by our payment processor, we do not store card numbers).</p>
+                <p>We do not sell your personal data to third parties.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms Modal -->
+    <div id="termsModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-50 p-4">
+        <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h2 class="text-2xl font-bold">Terms of Service</h2>
+                <button onclick="closeModal('termsModal')" class="text-slate-400 hover:text-slate-600 text-2xl">&times;</button>
+            </div>
+            <div class="p-6 modal-content text-slate-600 text-sm space-y-4">
+                <p>Welcome to SoulMirror. By using our website and purchasing our digital reports, you agree to these terms.</p>
+                <p><strong>Product Nature:</strong> Our assessments are for entertainment and self-reflection purposes only. They are not a substitute for professional psychological advice, diagnosis, or treatment.</p>
+                <p><strong>Delivery:</strong> Digital goods are delivered instantly upon successful payment. Access links will be displayed on-screen and/or sent to your email.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Refund Modal -->
+    <div id="refundModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-50 p-4">
+        <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h2 class="text-2xl font-bold">Refund Policy</h2>
+                <button onclick="closeModal('refundModal')" class="text-slate-400 hover:text-slate-600 text-2xl">&times;</button>
+            </div>
+            <div class="p-6 modal-content text-slate-600 text-sm space-y-4">
+                <p>Due to the instant, digital nature of our reports, <strong>all sales are final</strong>. Once a report has been generated and unlocked, we cannot issue a refund.</p>
+                <p>However, if you experience a technical error, failed delivery, or duplicate charge, please contact our support team within 7 days of your purchase, and we will manually resolve the issue or issue a refund at our discretion.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-50 p-4">
+        <div class="bg-white rounded-2xl w-full max-w-md max-h-[90vh] flex flex-col">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h2 class="text-2xl font-bold">Contact Support</h2>
+                <button onclick="closeModal('contactModal')" class="text-slate-400 hover:text-slate-600 text-2xl">&times;</button>
+            </div>
+            <div class="p-6 text-slate-600 text-sm text-center">
+                <p class="mb-4">Need help with your recent purchase?</p>
+                <a href="mailto:support@soulmirror.xyz" class="text-indigo-600 font-bold text-lg hover:underline">support@soulmirror.xyz</a>
+                <p class="mt-4 text-xs text-slate-400">We typically reply within 24 hours.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Modals -->
+    <script>
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('fixed')) {
+                event.target.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
