@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What's Your Attachment Style? — AuraQuest Lab</title>
+<meta name="description" content="12 questions. 3 minutes. A clearer look at how you love.">
+<meta property="og:title" content="What's Your Attachment Style?">
+<meta property="og:description" content="12 questions. 3 minutes. A clearer look at how you love.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --ink:#111827; --muted:#6b7280; --line:#e5e7eb; --bg:#faf9f7; --card:#ffffff;
+    --accent:#111827; --type:#111827; --type-soft:#f3f4f6;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; font-size:17px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:0 20px}
+  header{padding:20px 0}
+  header a{color:var(--ink);text-decoration:none;font-weight:700;letter-spacing:.2px;font-size:17px}
+  main{padding-bottom:64px}
+  h1{font-size:34px;line-height:1.2;letter-spacing:-.5px;margin:24px 0 12px}
+  .sub{color:var(--muted);font-size:18px;margin:0 0 28px}
+  .points{list-style:none;padding:0;margin:0 0 32px}
+  .points li{padding:10px 0 10px 26px;position:relative;color:#374151}
+  .points li:before{content:"";position:absolute;left:0;top:18px;width:8px;height:8px;border-radius:50%;background:var(--type)}
+  .btn{
+    display:block;width:100%;padding:17px 24px;border:0;border-radius:999px;
+    background:var(--accent);color:#fff;font-size:17px;font-weight:600;cursor:pointer;
+    text-align:center;text-decoration:none;transition:opacity .15s;
+  }
+  .btn:hover{opacity:.9}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .fine{color:var(--muted);font-size:13px;margin-top:16px;line-height:1.5}
+  .hidden{display:none !important}
+
+  /* quiz */
+  .bar{height:4px;background:var(--line);border-radius:99px;overflow:hidden;margin:8px 0 6px}
+  .bar span{display:block;height:100%;width:0;background:var(--ink);transition:width .25s ease}
+  .count{font-size:13px;color:var(--muted);margin-bottom:28px}
+  .q{font-size:24px;line-height:1.35;letter-spacing:-.2px;margin:0 0 24px;min-height:96px}
+  .opt{
+    display:block;width:100%;text-align:left;padding:16px 20px;margin-bottom:10px;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    font-size:16px;color:var(--ink);cursor:pointer;transition:border-color .12s,background .12s;
+  }
+  .opt:hover{border-color:#9ca3af}
+  .opt.sel{border-color:var(--ink);background:#f9fafb}
+  .back{background:none;border:0;color:var(--muted);font-size:15px;cursor:pointer;padding:8px 0;margin-top:8px}
+
+  /* result */
+  .badge{display:inline-block;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;
+    color:var(--type);background:var(--type-soft);padding:6px 12px;border-radius:999px;margin-bottom:16px;font-weight:700}
+  .rname{font-size:40px;line-height:1.1;letter-spacing:-1px;margin:0 0 10px;color:var(--type)}
+  .rtag{font-size:19px;color:var(--muted);font-style:italic;margin:0 0 32px}
+  .sect{margin:32px 0}
+  .sect h2{font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin:0 0 12px;font-weight:700}
+  .sect ul{margin:0;padding-left:20px}
+  .sect li{margin:8px 0;color:#374151}
+
+  /* locked */
+  .locked{position:relative;margin:36px 0 0;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
+  .mock{padding:26px 22px;filter:blur(5px);user-select:none;pointer-events:none;color:#9ca3af}
+  .mock h3{font-size:15px;letter-spacing:1px;text-transform:uppercase;margin:0 0 12px}
+  .mock .row{height:10px;background:#e5e7eb;border-radius:6px;margin:10px 0}
+  .mock .row.s{width:62%}.mock .row.m{width:84%}.mock .row.l{width:94%}
+  .lock-cta{
+    position:absolute;inset:auto 0 0 0;padding:28px 22px 24px;text-align:center;
+    background:linear-gradient(to top,#fff 30%,rgba(255,255,255,.94) 70%,rgba(255,255,255,0));
+  }
+  .lock-cta p{margin:0 0 14px;font-size:15px;color:var(--muted)}
+  .lock-cta .btn{max-width:360px;margin:0 auto}
+  .trust{font-size:12px;color:var(--muted);margin-top:12px}
+
+  .share{display:flex;gap:10px;margin-top:28px}
+  .share button{flex:1;padding:13px;border-radius:999px;border:1px solid var(--line);
+    background:var(--card);font-size:15px;cursor:pointer;color:var(--ink)}
+  .restart{display:block;text-align:center;margin:26px 0 0;color:var(--muted);font-size:14px}
+  footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:13px}
+  footer a{color:var(--muted)}
+  @media (max-width:420px){
+    h1{font-size:29px} .q{font-size:21px;min-height:88px} .rname{font-size:32px}
+  }
+</style>
+</head>
+<body>
+
+<header><div class="wrap"><a href="/">AuraQuest Lab</a></div></header>
+
+<main class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section id="intro">
+    <h1>What's your attachment style?</h1>
+    <p class="sub">12 questions. 3 minutes. A clearer look at how you love.</p>
+    <ul class="points">
+      <li>No sign-up. Your result appears instantly.</li>
+      <li>Four types, based on how you handle closeness and distance.</li>
+      <li>Free result. Full report if you want the scripts.</li>
+    </ul>
+    <button class="btn" id="start">Start the test →</button>
+    <p class="fine">For adults 18+. This is a self-reflection tool, not a diagnosis.</p>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section id="quiz" class="hidden">
+    <div class="bar"><span id="prog"></span></div>
+    <div class="count"><span id="qnum">1</span> / 12</div>
+    <h2 class="q" id="qtext"></h2>
+    <div id="opts"></div>
+    <button class="back" id="back">← Back</button>
+  </section>
+
+  <!-- ============ RESULT ============ -->
+  <section id="result" class="hidden">
+    <div class="badge" id="rbadge">Your type</div>
+    <h2 class="rname" id="rname"></h2>
+    <p class="rtag" id="rtag"></p>
+
+    <div class="sect">
+      <h2>You probably…</h2>
+      <ul id="rbullets"></ul>
+    </div>
+
+    <div class="sect">
+      <h2>What this means</h2>
+      <p id="rlead" style="margin:0;color:#374151"></p>
+    </div>
+
+    <!-- 付费墙 -->
+    <div class="locked" id="locked">
+      <div class="mock" aria-hidden="true">
+        <h3>Your full report</h3>
+        <div class="row l"></div><div class="row m"></div><div class="row l"></div>
+        <div class="row s"></div>
+        <h3 style="margin-top:22px">At work</h3>
+        <div class="row m"></div><div class="row l"></div><div class="row s"></div>
+        <h3 style="margin-top:22px">Under stress</h3>
+        <div class="row l"></div><div class="row m"></div>
+        <h3 style="margin-top:22px">The 7 scripts</h3>
+        <div class="row l"></div><div class="row s"></div><div class="row m"></div>
+      </div>
+      <div class="lock-cta">
+        <p>Your full 18-page report is ready.</p>
+        <a class="btn" id="buy" href="https://auraquestlab.gumroad.com/l/attachment-style"
+           target="_blank" rel="noopener">Unlock the full report — $4.99</a>
+        <div class="trust">Instant download · No subscription · Secure checkout by Gumroad<br>
+          Tax calculated at checkout where applicable.</div>
+      </div>
+    </div>
+
+    <div class="share">
+      <button id="share">Share my type</button>
+      <button id="copy">Copy link</button>
+    </div>
+
+    <a class="restart" href="/quiz.html">Retake the test</a>
+
+    <p class="fine">Self-reflection only — not a diagnosis and not a substitute for professional care.
+      If you are in crisis, contact your local emergency number.</p>
+  </section>
+
+</main>
+
+<footer><div class="wrap">
+  © 2026 AuraQuest Lab. All rights reserved.<br>
+  Questions? <a href="mailto:support@auraquestlab.com">support@auraquestlab.com</a> — we reply within 2 business days.<br>
+  <a href="/privacy.html">Privacy Policy</a> ·
+  <a href="/terms.html">Terms of Service</a> ·
+  <a href="/refund.html">Refund Policy</a>
+</div></footer>
+
+<script>
+/* ---------- 数据 ---------- */
+const QUESTIONS = [
+  "When someone I care about goes quiet, my first thought is that something is wrong between us.",
+  "I need to hear that I matter more often than most people seem to.",
+  "If a message sits unanswered for hours, I reread mine and look for mistakes.",
+  "I assume people will get tired of me eventually.",
+  "I would rather explain too much than be misunderstood.",
+  "When someone pulls back, I move toward them right away.",
+  "When things get intense, I suddenly get busy.",
+  "I would rather solve a problem alone than ask for help.",
+  "I keep parts of my life out of the people closest to me.",
+  "Too much closeness makes me want air.",
+  "I say \"I'm fine\" when I'm not, to keep the peace.",
+  "I find it easy to tell people close to me what I actually need."
+];
+
+const OPTIONS = ["Not like me", "A little like me", "Mostly like me", "Very much like me"];
+
+const ANX = [0, 1, 2, 3, 4, 5];
+const AVO = [6, 7, 8, 9, 10, 11];
+const REV = new Set([11]); // 反向计分
+
+const RESULTS = {
+  anchor: {
+    name: "The Anchor", emoji: "🟢", color: "#059669", soft: "#ecfdf5",
+    tagline: "Close feels safe. Space feels fine.",
+    bullets: [
+      "You say what you need before it turns into a problem.",
+      "You can spend a Friday alone and actually enjoy it.",
+      "When someone is upset, you ask instead of guessing."
+    ],
+    lead: "You tend to trust that people will still be there — and you don't need constant proof. That makes you the person others exhale around."
+  },
+  reacher: {
+    name: "The Reacher", emoji: "🔴", color: "#dc2626", soft: "#fef2f2",
+    tagline: "I'd rather over-love than be left.",
+    bullets: [
+      "You notice a shift in someone's tone before anyone else does.",
+      "You replay conversations looking for the moment it went wrong.",
+      "You say \"it's okay\" while your chest says otherwise."
+    ],
+    lead: "You move toward people when things feel uncertain. Your closeness is real and generous — but silence reads as a verdict to you, and that's exhausting."
+  },
+  fortress: {
+    name: "The Fortress", emoji: "🔵", color: "#2563eb", soft: "#eff6ff",
+    tagline: "I'm fine. I'm always fine.",
+    bullets: [
+      "You get busy right when someone gets close.",
+      "You've ended something good for a reason that felt urgent at the time.",
+      "You'd rather fix it alone than explain it twice."
+    ],
+    lead: "You handle a lot on your own, and you've learned that needing people is risky. Your independence is real — but some of it is a door, not a fact."
+  },
+  pushpull: {
+    name: "The Push-Pull", emoji: "🟣", color: "#7c3aed", soft: "#f5f3ff",
+    tagline: "Come closer. No — not that close.",
+    bullets: [
+      "You want closeness, then panic when you get it.",
+      "You test people to see if they'll stay.",
+      "You can be all in on Monday and gone by Friday."
+    ],
+    lead: "You want to be met and you don't quite trust it when you are. The intensity you feel is not the problem — the whiplash is."
+  }
+};
+
+const STREAK = { anchor: "reacher", reacher: "fortress", fortress: "reacher", pushpull: "anchor" };
+
+/* ---------- 状态 ---------- */
+let answers = [];
+let idx = 0;
+
+/* ---------- 埋点 ---------- */
+function track(name, props) {
+  try {
+    if (window.clarity) clarity("event", name);
+    if (props && window.clarity) {
+      Object.keys(props).forEach(k => clarity("set", k, String(props[k])));
+    }
+  } catch (e) {}
+}
+(function captureSrc() {
+  try {
+    const s = new URLSearchParams(location.search).get("src");
+    if (s) localStorage.setItem("aq_src", s);
+    const src = localStorage.getItem("aq_src") || "direct";
+    if (window.clarity) clarity("set", "src", src);
+  } catch (e) {}
+})();
+
+/* ---------- 渲染 ---------- */
+const $ = id => document.getElementById(id);
+
+function show(which) {
+  ["intro", "quiz", "result"].forEach(s => $(s).classList.toggle("hidden", s !== which));
+  window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+function renderQuestion() {
+  $("qnum").textContent = idx + 1;
+  $("prog").style.width = ((idx / QUESTIONS.length) * 100).toFixed(1) + "%";
+  $("qtext").textContent = QUESTIONS[idx];
+
+  const box = $("opts");
+  box.innerHTML = "";
+  OPTIONS.forEach((label, i) => {
+    const b = document.createElement("button");
+    b.className = "opt";
+    b.type = "button";
+    b.textContent = label;
+    b.onclick = () => choose(i + 1, b);
+    box.appendChild(b);
+  });
+  $("back").style.visibility = idx === 0 ? "hidden" : "visible";
+}
+
+function choose(value, btn) {
+  answers[idx] = value;
+  [...$("opts").children].forEach(el => el.classList.remove("sel"));
+  btn.classList.add("sel");
+
+  setTimeout(() => {
+    if (idx < QUESTIONS.length - 1) {
+      idx++;
+      renderQuestion();
+    } else {
+      finish();
+    }
+  }, 180);
+}
+
+function scoreDim(list) {
+  let sum = 0;
+  for (const i of list) sum += REV.has(i) ? 5 - answers[i] : answers[i];
+  return Math.round(((sum - list.length) / (list.length * 3)) * 100);
+}
+
+function finish() {
+  const a = scoreDim(ANX);
+  const v = scoreDim(AVO);
+  let key = "anchor";
+  if (a >= 50 && v >= 50) key = "pushpull";
+  else if (a >= 50) key = "reacher";
+  else if (v >= 50) key = "fortress";
+
+  const mixed = Math.abs(a - 50) <= 8 || Math.abs(v - 50) <= 8;
+  track("quiz_complete", { type: key, anxiety: a, avoidance: v });
+  renderResult(key, mixed, a, v);
+}
+
+function renderResult(key, mixed, a, v) {
+  const r = RESULTS[key];
+  document.documentElement.style.setProperty("--type", r.color);
+  document.documentElement.style.setProperty("--type-soft", r.soft);
+
+  $("rbadge").textContent = r.emoji + "  Your type";
+  $("rname").textContent = r.name;
+  $("rtag").textContent = r.tagline + (mixed ? " (with a " + STREAK[key] + " streak)" : "");
+
+  $("rbullets").innerHTML = "";
+  r.bullets.forEach(t => {
+    const li = document.createElement("li");
+    li.textContent = t;
+    $("rbullets").appendChild(li);
+  });
+
+  $("rlead").textContent = r.lead;
+
+  show("result");
+  track("result_view", { type: key });
+  track("paywall_view", { type: key, price: 4.99 });
+
+  // 分享文案
+  window.__shareText = "I'm " + r.name + ". " + r.tagline + " What's your attachment style?";
+}
+
+/* ---------- 交互 ---------- */
+$("start").onclick = () => {
+  track("quiz_start");
+  idx = 0;
+  answers = [];
+  renderQuestion();
+  show("quiz");
+};
+
+$("back").onclick = () => {
+  if (idx > 0) { idx--; renderQuestion(); }
+};
+
+$("buy").onclick = () => track("paywall_click", { price: 4.99 });
+
+$("share").onclick = async () => {
+  track("share_click", { channel: "native" });
+  const data = { title: "What's your attachment style?", text: window.__shareText, url: location.origin + "/quiz.html" };
+  if (navigator.share) {
+    try { await navigator.share(data); } catch (e) {}
+  } else {
+    copyLink();
+  }
+};
+
+$("copy").onclick = () => { track("share_click", { channel: "copy" }); copyLink(); };
+
+function copyLink() {
+  const text = (window.__shareText || "What's your attachment style?") + " " + location.origin + "/quiz.html";
+  const done = () => { $("copy").textContent = "Copied ✓"; setTimeout(() => $("copy").textContent = "Copy link", 1600); };
+  if (navigator.clipboard) navigator.clipboard.writeText(text).then(done).catch(fallback);
+  else fallback();
+  function fallback() {
+    const ta = document.createElement("textarea");
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); done(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+}
+
+track("quiz_view");
+</script>
+</body>
+</html>
